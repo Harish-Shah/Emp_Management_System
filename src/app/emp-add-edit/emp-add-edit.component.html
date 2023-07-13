@@ -1,0 +1,79 @@
+<div mat-dialog-title>
+    <h1>Employee Form</h1>
+</div>
+<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+<div mat-dialog-content class="content">
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" formControlName="firstName">
+    <div *ngIf="empForm.get('firstName')?.invalid && empForm.get('firstName')?.touched">
+        <small class="text-warning" *ngIf="empForm.get('firstName')?.hasError('required')">Name is required</small>
+        <small class="text-warning" *ngIf="empForm.get('firstName')?.hasError('minlength')">Name is too short</small>
+        <small class="text-warning" *ngIf="empForm.get('firstName')?.hasError('spam')">Name is Spam please use valid Name</small>
+    </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput type="text" formControlName="lastName">
+        <div *ngIf="empForm.get('lastName')?.invalid && empForm.get('lastName')?.touched">
+            <small class="text-warning" *ngIf="empForm.get('lastName')?.hasError('required')">lastName is required</small>
+            <small class="text-warning" *ngIf="empForm.get('lastName')?.hasError('minlength')">lastName is too short</small>
+        </div>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+        <div *ngIf="empForm.get('email')?.invalid && empForm.get('email')?.touched">
+            <small class="text-warning" *ngIf="empForm.get('email')?.hasError('required')">email is required</small>
+            <small class="text-warning" *ngIf="empForm.get('email')?.hasError('minlength')">email is too short</small>
+        </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>DOB</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob"> 
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-radio-group aria-label="Select an option" formControlName="gender">
+            <mat-label> <b>Gender</b> </mat-label>
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+          </mat-radio-group>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Education</mat-label>
+            <mat-select formControlName="education">
+              <mat-option *ngFor="let val of education" [value]="val">
+                {{val}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Company Name</mat-label>
+            <input matInput type="text" formControlName="company">
+        </mat-form-field>  
+    </div>
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Experience</mat-label>
+            <input matInput type="text" type="number" formControlName="experience">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Package</mat-label>
+            <input matInput type="text" type="number" formControlName="package">
+            <mat-hint>In Rupees</mat-hint>
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">{{data ? 'Update':'Save'}}</button>
+</div>
+</form>

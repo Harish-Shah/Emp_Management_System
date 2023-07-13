@@ -1,0 +1,19 @@
+.row{
+    display: flex;
+    gap: 10px;
+}
+
+.content{
+    padding-top: 10px;
+}
+
+mat-form-field{
+    width: 100%; //every component will use same space i.e. name,lname,...
+}
+
+.action{
+    padding: 0px 25px 20px;
+    button {  //cancel and save button will take same spcae as form
+        flex: 1 ;
+    }
+}
